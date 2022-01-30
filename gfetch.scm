@@ -15,9 +15,10 @@
            (set! count (+ count 1))) line))
 
 (define (get-cpu) 
-  (let ((input-file (open-file "/proc/cpuinfo" "r"))) 
-    (car (cdr (string-split (get-line-n input-file 5) #\:)))))
+  (call-with-input-file "/proc/cpuinfo" (lambda (port) 
+                                          (car (cdr (string-split (get-line-n port 5) #\:))))))
 
 (display "gFetch")
+(newline)
 (display (string-append "CPU:" (get-cpu)))
 ;;; gfetch.scm ends here
