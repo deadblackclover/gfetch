@@ -18,7 +18,14 @@
   (call-with-input-file "/proc/cpuinfo" (lambda (port) 
                                           (car (cdr (string-split (get-line-n port 5) #\:))))))
 
+(define (get-distro) 
+  (call-with-input-file "/etc/os-release" (lambda (port) 
+                                            (car (cdr (string-split (get-line-n port 3) #\=))))))
+
 (display "gFetch")
 (newline)
 (display (string-append "CPU:" (get-cpu)))
+(newline)
+(display (string-append "DISTRO: " (get-distro)))
+(newline)
 ;;; gfetch.scm ends here
