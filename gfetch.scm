@@ -41,6 +41,8 @@
 (newline)
 (display (string-append "HOSTNAME: " (get-hostname)))
 (newline)
+(display (string-append "USER: " (getenv "USER")))
+(newline)
 (display (string-append "CPU:" (get-cpu)))
 (newline)
 (display (string-append "DISTRO: " (get-distro)))
