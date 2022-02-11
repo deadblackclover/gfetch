@@ -5,6 +5,7 @@
 
 ;;; Code:
 (use-modules (ice-9 rdelim) 
+             (ice-9 regex) 
              (ice-9 textual-ports))
 
 (define (get-line-n lines num) 
@@ -22,10 +23,15 @@
   (call-with-input-file "/etc/os-release" (lambda (port) 
                                             (car (cdr (string-split (get-line-n port 3) #\=))))))
 
+(define (get-shell) 
+  (match:substring (string-match "([^/]+)?$" (getenv "SHELL"))))
+
 (display "gFetch")
 (newline)
 (display (string-append "CPU:" (get-cpu)))
 (newline)
 (display (string-append "DISTRO: " (get-distro)))
+(newline)
+(display (string-append "SHELL: " (get-shell)))
 (newline)
 ;;; gfetch.scm ends here
