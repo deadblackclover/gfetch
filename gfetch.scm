@@ -26,6 +26,9 @@
 (define (get-shell) 
   (match:substring (string-match "([^/]+)?$" (getenv "SHELL"))))
 
+(define (get-de) 
+  (string-append (getenv "XDG_CURRENT_DESKTOP") "/" (getenv "DESKTOP_SESSION")))
+
 (display "gFetch")
 (newline)
 (display (string-append "CPU:" (get-cpu)))
@@ -33,5 +36,7 @@
 (display (string-append "DISTRO: " (get-distro)))
 (newline)
 (display (string-append "SHELL: " (get-shell)))
+(newline)
+(display (string-append "DE: " (get-de)))
 (newline)
 ;;; gfetch.scm ends here
